@@ -29,6 +29,7 @@ alert('this website for you!');
 alert('you should have 4 at least to win!')
 alert('Let\'s go!');
 var fsc=0;
+// sart the game buttton.
 function startGame() {
   startButton.classList.add("hide");
   scoreArea.classList.add("hide");
@@ -44,7 +45,7 @@ function startGame() {
   }
   showQuestion(questions[qNumber]);
 }
-
+// show question depend on button pressed
 function showQuestion(question) {
   qElement.innerText = question.question;
   question.answers.forEach(answer => {
@@ -54,15 +55,13 @@ function showQuestion(question) {
     if (answer.correct) {
       button.dataset.correct = answer.correct;
 	  finalScore++;
-	  fsc=finalScore;
-
-	  
+	  fsc=finalScore; 
     }
     button.addEventListener("click", selectAnswer);
     answerButtons.appendChild(button);
   });
 }
-
+// the timer start using this function
 function startClock() {
   countdown.innerHTML = "Time Remaining: " + timer;
   if (timer <= 0) {
@@ -73,7 +72,7 @@ function startClock() {
   }
 }
 
-
+//  select the answer and see the correct answer from our array.
 function selectAnswer(e) {
   var selectedButton = e.target;
   if (!selectedButton.dataset.correct) {
@@ -93,14 +92,15 @@ function selectAnswer(e) {
   }
 }
 
-
+// when go to the score field clear the questions
+// when move to other quetion too.
 function clearQuestion() {
   while (answerButtons.firstChild) {
     answerButtons.removeChild(answerButtons.firstChild);
   }
 }
 
-
+// end the game when it's finished so show the restart button
 function gameOver() {
   clearInterval(runningTimer);
   countdown.innerHTML = "Finished";
@@ -111,15 +111,16 @@ function gameOver() {
   timer = 90;
   score = 0;
 }
-
+// show the results
 function showResults() {
-  //inalScore = timer;
  
   qElement.innerText = "";
   scoreArea.classList.remove("hide");
   answerButtons.classList.add("hide");
   imageArea.classList.remove("hide");
+  // view the score using html
  scoreArea.innerHTML = `<h5 style="color:white;"> Your score is ${finalScore}!</h5><div id="init"><span style="color:white;">Name:</span> <input type="text" style="color:black;" name="initials" id="initials" placeholder="Enter Your Name"><button id="save-btn" class="save-btn btn" onclick="submitScores(event)" disabled>Save</button>`;
+ //show image based on the score
   if(finalScore >=5){
   imageArea.innerHTML=`<img src="./assets/images/right.gif">`;
   finalScore=0;
@@ -136,7 +137,7 @@ function showResults() {
   });
 }
 
-
+// submit the scores to local storage file
 function submitScores(e) {
   var score = {
     score: fsc,
@@ -149,14 +150,15 @@ function submitScores(e) {
   localStorage.setItem("highScores", JSON.stringify(highScores));
   displayScores();
 }
-
+// function to display the all scores from local storage.
 function displayScores() {
   clearInterval(runningTimer);
+  //clear the html and hide everything just show the score
   countdown.innerHTML = "";
   clearQuestion();
   qElement.innerText = "";
   scoreArea.classList.remove("hide");
-
+//show the score area 
   scoreArea.innerHTML = `<h2 style="color:white;">High Scores</h2><ul id="highScoresList"></ul><button id="clearScores" class="btn" onclick="clearScores()">Clear Scores</button>`;
   var highScoresList = document.getElementById("highScoresList");
   highScoresList.innerHTML = highScores
@@ -167,13 +169,14 @@ function displayScores() {
   startButton.classList.remove("hide");
   highScoresButton.classList.add("hide");
 }
-
+// function to clear the score
 
 function clearScores() {
   highScores = [];
   highScoresList.innerHTML = "<h3 style='color:white;'>Scores have been Cleared</h3>";
   document.getElementById("clearScores").classList.add("hide");
 }
+// Array to make the questions easy to iterate over.
 
 var questions = [
   {
