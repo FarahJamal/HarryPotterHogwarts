@@ -18,25 +18,33 @@ while(userInput == null || userInput==""){
 
 //show the static pic for every character at the top!
 if(userInput ==='Harrypotter' || userInput ==='harrypotter'){
-      
+        stretchGoal(userInput);
+
 message(msg[0],userInput,'gryfndor.png');
+
 
 }
 else if(userInput ==='Severus Snape' || userInput ==='severus Snape'){
+  stretchGoal(userInput);
 
 message(msg[1],userInput,'mothereyes.png');
    
 
 }
 else if(userInput ==='Voldemort' || userInput ==='voldemort'){
- 
+   stretchGoal(userInput);
+
 message(msg[2],userInput,"volquote.png");
 }
 else if(userInput ==='Draco Malfoy ' || userInput ==='draco malfoy'){
+    stretchGoal(userInput);
+
 message(msg[3],userInput,'slythrin.png');
 
 }
 else if(userInput ==='harmonie' || userInput ==='harmonie'){
+    stretchGoal(userInput);
+
 
   message(msg[4],userInput,"gryfndor.png");
 
@@ -50,14 +58,14 @@ else{
 
 if(userInput =="harrypotter" || userInput==="Harrypotter" ){
 var count =prompt('how namy images do you want to see for'+" "+userInput+"\r\n \r\n you must choose from 1-5");
-  if(count>5){
-      userInput=prompt('how namy images do you want to see for '+" "+userInput+"\r\n \r\n you must choose from 1-5");
+  while(count>5){
+      count=prompt('how namy images do you want to see for '+" "+userInput+"\r\n \r\n you must choose from 1-5");
       }
 }
 else{
   var count =prompt('how namy images do you want to see for'+" "+userInput+"\r\n \r\n you must choose from 1-4");
-  if(count>4){
-      userInput=prompt('how namy images do you want to see for '+" "+userInput+"\r\n \r\n you must choose from 1-4");
+  while(count>4){
+      count=prompt('how namy images do you want to see for '+" "+userInput+"\r\n \r\n you must choose from 1-4");
       }
 }
    
@@ -65,7 +73,6 @@ else{
 
 for(var i=1; i<=count ;i++){
 if(userInput ==='Harrypotter' || userInput ==='harrypotter'){
-  
 picsNo('harry');
 
 }
@@ -110,4 +117,10 @@ function message(message,inputUser, housePng ){
 document.write('</br>');
 }
 
+function stretchGoal(userChar)
+{
+ alert('So you\'ve choose'+" "+userChar);
+ var spell= prompt('Do you know what is the spell most used by'+ " "+userChar);
+ document.write('<h1 class="center">alright!'+userChar+" "+'most used spell is :'+" "+'<span class="spell">'+spell+'</span>'+'</h1>');
+}
 
